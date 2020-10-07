@@ -134,4 +134,23 @@ public class StudentDbUtil {
 			close(myConn, myStmt, null);
 		}
 	}
+	
+	public void deleteStudent(int id) {
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		
+		try {
+			myConn = dataSource.getConnection();
+			String sql = "DELETE FROM student WHERE id=?";
+			myStmt = myConn.prepareStatement(sql);
+			myStmt.setInt(1, id);
+			myStmt.execute();		
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		finally {
+			close(myConn, myStmt, null);
+		}		
+	}
 }
